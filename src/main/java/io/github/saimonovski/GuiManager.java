@@ -10,9 +10,17 @@ import org.bukkit.inventory.Inventory;
 import java.util.HashMap;
 import java.util.Map;
 
-
+/**
+ * A class to manage opened inventories and their holders, this is singleton so creating instance is only by
+ * <code>GuiManager.getInstance()</code>
+ */
 public class GuiManager {
     private static GuiManager manager;
+
+    /**
+     * A method to get instance of manager (singleton)
+     * @return a instance of gui manager 
+     */
     public static  GuiManager getInstance(){
         return manager != null ? manager : new GuiManager();
     }
