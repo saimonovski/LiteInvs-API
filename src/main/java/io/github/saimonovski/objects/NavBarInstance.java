@@ -2,11 +2,12 @@ package io.github.saimonovski.objects;
 
 
 import io.github.saimonovski.GuiManager;
+import io.github.saimonovski.handlers.NavBarHolder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
-
+@SuppressWarnings("unused")
 public abstract class NavBarInstance implements NavBarHolder {
 
 

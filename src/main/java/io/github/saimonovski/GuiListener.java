@@ -24,6 +24,8 @@ public class GuiListener implements Listener {
         this.manager = manager;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }
+
+
     @EventHandler
     public void onClick(InventoryClickEvent e){
         this.manager.handleClick(e);

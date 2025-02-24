@@ -8,6 +8,9 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Instance that represents a BackGroundHandler
+ */
 public  class InventoryBackGround implements BackGroundHandler {
     private final Map<Integer, ItemStack> background = new HashMap<>();
 
@@ -27,6 +30,10 @@ public  class InventoryBackGround implements BackGroundHandler {
             background.put(slot,itemStack);
     }
 
+    /**
+     *
+     * @return slots that has been taken by background items
+     */
     public Collection<Integer> getOccupiedSlots() {
         return background.keySet();
     }

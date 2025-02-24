@@ -2,13 +2,19 @@ package io.github.saimonovski.objects;
 
 
 import io.github.saimonovski.GuiInstance;
+import io.github.saimonovski.handlers.NavBarHolder;
 import io.github.saimonovski.handlers.PaginationHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
 import java.util.*;
 
-@SuppressWarnings("ALL")
+/**
+ * Represents working pagination system
+ * to use this class to make your own gui just extend it
+ */
+
+@SuppressWarnings("unused")
 public abstract class PaginationInstance extends GuiInstance implements PaginationHandler {
     private int maxItemsInPage, currentPage, pagesCount;
     private NavBarHolder navBar;
@@ -17,8 +23,13 @@ public abstract class PaginationInstance extends GuiInstance implements Paginati
     private final Inventory inventory;
     private final List<InventoryButton> buttons = new ArrayList<>();
     private final Map<Integer, List<InventoryButton>> integerListMap = new HashMap<>();
-    private Map<Integer, InventoryButton> currentMappings = new HashMap<>();
+    private final Map<Integer, InventoryButton> currentMappings = new HashMap<>();
 
+    /**
+     *
+     * @param maxItemsInPage how many items can be in one page
+     * @param inventory instance of an inventory to create pagination system in it
+     */
     public PaginationInstance(int maxItemsInPage, Inventory inventory) {
         super(inventory);
         navBar = getNavbar();
@@ -26,7 +37,6 @@ public abstract class PaginationInstance extends GuiInstance implements Paginati
         this.isLastPage = false;
         this.maxItemsInPage = maxItemsInPage;
         this.currentPage = 1;
-        this.navBar = navBar;
         this.inventory = inventory;
     }
     @Override
@@ -38,10 +48,19 @@ public abstract class PaginationInstance extends GuiInstance implements Paginati
             return availableSlots.length;
         }
     }
+
+    /**
+     *
+     * @return Current mappings slot to item in actual page, this may be changed after changed the page
+     */
     public Map<Integer, InventoryButton> getCurrentMappings(){
         return currentMappings;
     }
 
+    /**
+     *
+     * @return number of pages
+     */
     public int getPagesCount(){
         if (buttons.isEmpty()) return 1;
         int count = buttons.size() / maxItemsInPage();
@@ -57,6 +76,11 @@ public abstract class PaginationInstance extends GuiInstance implements Paginati
     public void setMaxItemsInPage(int maxItemsInPage){
         this.maxItemsInPage = maxItemsInPage;
     }
+
+    /**
+     * sets a slots where items can be placed, also count of this how many items has been set is the maxItemsInPage
+     * @param slots which slots should be available to set there items
+     */
     public void setAvailableSlots(int...slots){
         this.availableSlots = slots;
     }
