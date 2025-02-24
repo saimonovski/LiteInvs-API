@@ -11,7 +11,7 @@ import java.util.List;
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted"})
 public interface PaginationHandler extends InventoryHandler{
   /**
-   *
+   * method to return list of buttons
    * @return list of inventory buttons
    */
     List<InventoryButton> getButtonsList();

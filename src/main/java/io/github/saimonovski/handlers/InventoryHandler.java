@@ -31,8 +31,9 @@ public interface InventoryHandler {
     void onClose(InventoryCloseEvent e);
 
     /**
-     *
+     * method to get inventory instance
      * @return inventory instance of this handler
+     * @see Inventory
      */
     Inventory getInventory();
 }

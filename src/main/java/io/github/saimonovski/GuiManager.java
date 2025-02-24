@@ -39,7 +39,7 @@ public class GuiManager {
     /**
      * A method to register your inventory to a manager, recommended to use is<b> <code>openInventory(Player
      * player,
-     * InventoryHandler inventoryHandler) <code> </b> because that method will automatically open and register your
+     * InventoryHandler inventoryHandler) </code> </b> because that method will automatically open and register your
      * inventory
      * @param inventory wchich should be register
      * @param handler for it will be signed inventory object

@@ -6,6 +6,9 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Map;
 
+/**
+ * Handler of background
+ */
 @SuppressWarnings("unused")
 public interface BackGroundHandler {
     /**
@@ -15,7 +18,7 @@ public interface BackGroundHandler {
     void decorate(Inventory inventory);
 
     /**
-     *
+     * method to get background items
      * @return map of items where int represent a slot where item is stored
      */
     Map<Integer, ItemStack> getBackGroundItems();

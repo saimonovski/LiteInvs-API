@@ -15,7 +15,7 @@ import java.util.Collection;
 
 public interface NavBarHolder {
     /**
-     *
+     * Method to get slot where nextPageItem is placed
      * @return get slot where is placed <b>nextPageItem();</b>
      */
     int getNextPageSlot();
@@ -35,14 +35,14 @@ public interface NavBarHolder {
     int getPreviousPageSlot();
 
     /**
-     *
+     * Method to get item associated with next page action
      * @return returns an item to get nextPage after clicking on it
      */
 
     ItemStack nextPageItem();
 
     /**
-     *
+     * Method to get item associated with previous page action
      * @return returns an item to get nextPage after clicking on
      */
 

@@ -29,7 +29,7 @@ public abstract class GuiInstance implements InventoryHandler {
 
     /**
      * Method to get mapping of lot to button
-     * @return <b><code>Map '<'Integer, InventoryButton'>' </code></b> where Integer represents a slot where InventoryButton is placed
+     * @return <b><code>Map of Integer and InventoryButton  </code></b> where Integer represents a slot where InventoryButton is placed
      * @see InventoryButton
      */
 
