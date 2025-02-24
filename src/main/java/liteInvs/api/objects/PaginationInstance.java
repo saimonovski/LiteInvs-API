@@ -1,9 +1,10 @@
-package io.github.saimonovski.objects;
+package liteInvs.api.objects;
 
 
-import io.github.saimonovski.GuiInstance;
-import io.github.saimonovski.handlers.NavBarHolder;
-import io.github.saimonovski.handlers.PaginationHandler;
+import liteInvs.api.handlers.NavBarHolder;
+import liteInvs.api.handlers.PaginationHandler;
+import liteInvs.api.objects.GuiInstance;
+import liteInvs.api.objects.InventoryButton;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 

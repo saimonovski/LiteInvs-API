@@ -1,4 +1,4 @@
-package io.github.saimonovski.objects;
+package liteInvs.api.objects;
 
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;

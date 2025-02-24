@@ -1,8 +1,8 @@
-package io.github.saimonovski.objects;
+package liteInvs.api.objects;
 
 
-import io.github.saimonovski.GuiManager;
-import io.github.saimonovski.handlers.NavBarHolder;
+import liteInvs.api.GuiManager;
+import liteInvs.api.handlers.NavBarHolder;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;

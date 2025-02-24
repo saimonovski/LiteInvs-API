@@ -1,6 +1,6 @@
-package io.github.saimonovski.objects;
+package liteInvs.api.objects;
 
-import io.github.saimonovski.handlers.BackGroundHandler;
+import liteInvs.api.handlers.BackGroundHandler;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 

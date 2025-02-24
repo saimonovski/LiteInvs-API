@@ -1,6 +1,6 @@
-package io.github.saimonovski.handlers;
+package liteInvs.api.handlers;
 
-import io.github.saimonovski.objects.InventoryButton;
+import liteInvs.api.objects.InventoryButton;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  * Classes that implementing this interface  have to had specified pagination system.
  */
 @SuppressWarnings({"unused", "BooleanMethodIsAlwaysInverted"})
-public interface PaginationHandler extends InventoryHandler{
+public interface PaginationHandler extends InventoryHandler {
   /**
    * method to return list of buttons
    * @return list of inventory buttons

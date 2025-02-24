@@ -1,6 +1,6 @@
-package io.github.saimonovski;
+package liteInvs.api;
 
-import io.github.saimonovski.handlers.InventoryHandler;
+import liteInvs.api.handlers.InventoryHandler;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;

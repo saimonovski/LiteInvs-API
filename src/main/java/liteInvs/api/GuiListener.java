@@ -1,4 +1,4 @@
-package io.github.saimonovski;
+package liteInvs.api;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

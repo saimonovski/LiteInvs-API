@@ -1,9 +1,8 @@
-package io.github.saimonovski;
+package liteInvs.api.objects;
 
 
-import io.github.saimonovski.objects.InventoryBackGround;
-import io.github.saimonovski.objects.InventoryButton;
-import io.github.saimonovski.handlers.InventoryHandler;
+import liteInvs.api.handlers.BackGroundHandler;
+import liteInvs.api.handlers.InventoryHandler;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 
@@ -39,7 +38,7 @@ public abstract class GuiInstance implements InventoryHandler {
      * Method to add a button to an inventory
      * @param button button to add
      * @param slot slot where button should be placed <b>If this slot is currently taken slot will be overwritten ! (Not when this is slot of background)</b>
-     * @see io.github.saimonovski.handlers.BackGroundHandler
+     * @see BackGroundHandler
      * @see InventoryButton
      */
     public void addButton(InventoryButton button, int slot){
