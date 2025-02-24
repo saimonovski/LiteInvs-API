@@ -15,6 +15,9 @@ import java.util.Map;
  * <code>GuiManager.getInstance()</code>
  */
 public class GuiManager {
+    /**
+     * singleton instance of this manager, always represent only one instance of this class
+     */
     private static GuiManager manager;
 
     /**
@@ -22,7 +25,9 @@ public class GuiManager {
      * @return a instance of gui manager
      */
     public static  GuiManager getInstance(){
-        return manager != null ? manager : new GuiManager();
+    if(manager == null){new GuiManager();
+    }
+    return manager;
     }
 
     /**
