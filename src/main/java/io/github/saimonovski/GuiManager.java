@@ -72,12 +72,22 @@ public class GuiManager {
 
         handler.onClick(event);
     }
+    /**
+     * This method is for handle opening inventory, will find <b>InventoryHandler</b> and next make on the <b>onOpen()</b>
+     * method
+     * @param event event to handle this method
+     */
     public void handleOpen(InventoryOpenEvent event){
         InventoryHandler handler = activeInventories.get(event.getInventory());
         if(handler == null) return;
 
         handler.onOpen(event);
     }
+    /**
+     * This method is for handle closing, will find <b>InventoryHandler</b> and next make on the <b>onClose()</b>
+     * method
+     * @param event event to handle this method
+     */
     public void handleClose(InventoryCloseEvent event){
         Inventory inventory = event.getInventory();
         InventoryHandler handler = activeInventories.get(inventory);
