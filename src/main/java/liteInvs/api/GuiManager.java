@@ -25,7 +25,7 @@ public class GuiManager {
      * @return a instance of gui manager
      */
     public static  GuiManager getInstance(){
-    if(manager == null){new GuiManager();
+    if(manager == null){manager = new GuiManager();
     }
     return manager;
     }
