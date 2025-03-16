@@ -69,8 +69,10 @@ new GuiListener(manager,javaPlugin);
      * @param inventoryHandler handler to register inventory and getInventory from
      */
     public void openInventory(Player player, InventoryHandler inventoryHandler){
-        registeredMembers.put(player.getUniqueId(), inventoryHandler);
-        Bukkit.getScheduler().runTask(plugin,() -> player.openInventory(inventoryHandler.getInventory()));
+        Bukkit.getScheduler().runTask(plugin,() -> {
+            player.openInventory(inventoryHandler.getInventory());
+            registeredMembers.put(player.getUniqueId(), inventoryHandler);
+        });
     }
 
     /**
