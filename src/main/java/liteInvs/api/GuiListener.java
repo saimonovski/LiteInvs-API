@@ -20,7 +20,7 @@ public class GuiListener implements Listener {
      * @param manager represents a manager which will be used to handle actions
      * @param plugin represents a plugin which will be used to register a listener
      */
-    public GuiListener(GuiManager manager, JavaPlugin plugin) {
+    protected GuiListener(GuiManager manager, JavaPlugin plugin) {
         this.manager = manager;
         plugin.getServer().getPluginManager().registerEvents(this, plugin);
     }

@@ -1,17 +1,21 @@
 package liteInvs.api;
 
 import liteInvs.api.handlers.InventoryHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryOpenEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
- * A class to manage opened inventories and their holders, this is singleton so creating instance is only by
+ * @author Saimonovski
+ *  A class to manage opened inventories and their holders, this is singleton so creating instance is only by
  * <code>GuiManager.getInstance()</code>
  */
 public class GuiManager {
@@ -19,41 +23,44 @@ public class GuiManager {
      * singleton instance of this manager, always represent only one instance of this class
      */
     private static GuiManager manager;
-
+    private final JavaPlugin plugin;
     /**
      * A method to get instance of manager (singleton)
      * @return a instance of gui manager
+     * <b> Before first time using the manager you have to register it in your main class by </b>
+     *<b> <code>GuiManager.register(JavaPlugin javaPlugin); method</code> </b>
      */
     public static  GuiManager getInstance(){
-    if(manager == null){manager = new GuiManager();
+    if(manager == null){throw new RuntimeException("Manager is not specified, look to the documentation");
     }
     return manager;
     }
 
     /**
-     * The constructor is private because can exist only one instance of this class
+     * A method uses to register manager with all listeners
+     * @param javaPlugin plugin to register in it
      */
-    private GuiManager(){}
-    private final Map<Inventory, InventoryHandler> activeInventories = new HashMap<>();
-
-    /**
-     * A method to register your inventory to a manager, recommended to use is<b> <code>openInventory(Player
-     * player,
-     * InventoryHandler inventoryHandler) </code> </b> because that method will automatically open and register your
-     * inventory
-     * @param inventory wchich should be register
-     * @param handler for it will be signed inventory object
-     */
-    public void registerInventory(Inventory inventory, InventoryHandler handler){
-        this.activeInventories.put(inventory, handler);
+    public static void register(JavaPlugin javaPlugin){
+        manager = new GuiManager(javaPlugin);
+new GuiListener(manager,javaPlugin);
     }
 
     /**
-     *  If you don't wanna more use your inventory to any of custom holders you can just unregister it here
-     * @param inventory inventory to unregister
+     * The constructor is private because can exist only one instance of this class
      */
-    public void unregisterInventory(Inventory inventory){
-        this.activeInventories.remove(inventory);
+    private GuiManager(JavaPlugin plugin){
+        this.plugin = plugin;
+    }
+    private final Map<UUID, InventoryHandler> registeredMembers = new HashMap<>();
+
+
+    /**
+     *  If you don't wanna more use your inventory to any of custom holders you can just unregister it here
+     * @param player player who is signed to this inventory
+     */
+    public void unregisterInventory(Player player)
+    {
+        this.registeredMembers.remove(player.getUniqueId());
     }
 
     /**
@@ -62,8 +69,8 @@ public class GuiManager {
      * @param inventoryHandler handler to register inventory and getInventory from
      */
     public void openInventory(Player player, InventoryHandler inventoryHandler){
-        this.activeInventories.put(inventoryHandler.getInventory(), inventoryHandler);
-        player.openInventory(inventoryHandler.getInventory());
+        registeredMembers.put(player.getUniqueId(), inventoryHandler);
+        Bukkit.getScheduler().runTask(plugin,() -> player.openInventory(inventoryHandler.getInventory()));
     }
 
     /**
@@ -72,7 +79,7 @@ public class GuiManager {
      * @param event event to handle this method
      */
     public void handleClick(InventoryClickEvent event){
-        InventoryHandler handler = activeInventories.get(event.getInventory());
+        InventoryHandler handler = registeredMembers.get(event.getWhoClicked().getUniqueId());
         if(handler == null) return;
 
         handler.onClick(event);
@@ -83,7 +90,7 @@ public class GuiManager {
      * @param event event to handle this method
      */
     public void handleOpen(InventoryOpenEvent event){
-        InventoryHandler handler = activeInventories.get(event.getInventory());
+        InventoryHandler handler = registeredMembers.get(event.getPlayer().getUniqueId());
         if(handler == null) return;
 
         handler.onOpen(event);
@@ -95,9 +102,9 @@ public class GuiManager {
      */
     public void handleClose(InventoryCloseEvent event){
         Inventory inventory = event.getInventory();
-        InventoryHandler handler = activeInventories.get(inventory);
+        InventoryHandler handler = registeredMembers.get(event.getPlayer().getUniqueId());
         if(handler == null) return;
-        this.unregisterInventory(inventory);
+        this.unregisterInventory((Player) event.getPlayer());
         handler.onClose(event);
     }
 
