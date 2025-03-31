@@ -145,7 +145,7 @@ public abstract class PaginationInstance extends GuiInstance implements Paginati
 
     @Override
     public Inventory getInventory() {
-        currentMappings.clear();
+
         inventory.clear();
 
         List<Integer> freeSlots = new ArrayList<>();
@@ -154,7 +154,7 @@ public abstract class PaginationInstance extends GuiInstance implements Paginati
         occupiedSlots.addAll(getBackGround().getOccupiedSlots());
         occupiedSlots.addAll(integerListMap.keySet());
 
-        if (availableSlots != null) {
+        if (this.availableSlots != null) {
             for (int slot : availableSlots) {
                 if (!occupiedSlots.contains(slot)) {
                     freeSlots.add(slot);
@@ -168,22 +168,30 @@ public abstract class PaginationInstance extends GuiInstance implements Paginati
             }
         }
         int startIndex = (currentPage - 1) * freeSlots.size();
-        int endIndex = Math.min(startIndex + freeSlots.size(), buttons.size());
+        int endIndex = Math.min(startIndex + freeSlots.size(), this.buttons.size());
 
         int slotIndex = 0;
-      buttons:  for (int i = startIndex; i < endIndex; i++) {
+        for (int i = startIndex; i < endIndex; ++i) {
             if (slotIndex < freeSlots.size()) {
-                InventoryButton button = getButtonsList().get(i);
-                for(var entrySet : integerListMap.entrySet()){
-                    if(!entrySet.getValue().contains(button)) continue;
-                    button.setItem(entrySet.getKey(),inventory);
-                    currentMappings.put(entrySet.getKey(), button);
-                     continue buttons;
+                InventoryButton button = this.getButtonsList().get(i);
+
+                for (Map.Entry<Integer, List<InventoryButton>> entrySet : this.integerListMap.entrySet()) {
+                    if (entrySet.getValue().contains(button)) {
+                        button.setItem(entrySet.getKey(), this.inventory);
+                        getCurrentMappings().put(entrySet.getKey(), button);
+                        continue;
+                    }
                 }
-               button.setItem(freeSlots.get(slotIndex), inventory);
-                currentMappings.put(slotIndex,button);
-                slotIndex++;
+
+                if (slotIndex < freeSlots.size()) {
+                    button.setItem(freeSlots.get(slotIndex), this.inventory);
+                    getCurrentMappings().put(freeSlots.get(slotIndex), button);
+                    ++slotIndex;
+                }
             }
+        }
+        for (var entry : getCurrentMappings().entrySet()) {
+            entry.getValue().setItem(entry.getKey(), inventory);
         }
 
         navBar.decorate(inventory);
