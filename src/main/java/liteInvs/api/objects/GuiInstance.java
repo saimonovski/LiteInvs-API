@@ -64,6 +64,7 @@ public abstract class GuiInstance implements InventoryHandler {
         getBackGround().handleClick(e);
         if(e.isCancelled()) return;
         InventoryButton button = getButtons().get(e.getRawSlot());
+        if(button == null) return;
         button.handleClick(e);
     }
 
