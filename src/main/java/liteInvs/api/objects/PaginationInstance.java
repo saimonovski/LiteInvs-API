@@ -145,38 +145,48 @@ public abstract class PaginationInstance extends GuiInstance implements Paginati
 
     @Override
     public Inventory getInventory() {
-
-        inventory.clear();
+        this.inventory.clear();
 
         List<Integer> freeSlots = new ArrayList<>();
         Set<Integer> occupiedSlots = new HashSet<>();
-        occupiedSlots.addAll(navBar.getOccupiedSlots());
+
+
+        occupiedSlots.addAll(getNavbar().getOccupiedSlots());
         occupiedSlots.addAll(getBackGround().getOccupiedSlots());
-        occupiedSlots.addAll(integerListMap.keySet());
+        occupiedSlots.addAll(this.integerListMap.keySet());
 
         if (this.availableSlots != null) {
-            for (int slot : availableSlots) {
+
+            for (int slot : this.availableSlots) {
                 if (!occupiedSlots.contains(slot)) {
                     freeSlots.add(slot);
                 }
             }
         } else {
-            for (int i = 0; i < inventory.getSize(); i++) {
+
+            for (int i = 0; i < this.inventory.getSize(); ++i) {
                 if (!occupiedSlots.contains(i)) {
                     freeSlots.add(i);
                 }
             }
         }
-        int startIndex = (currentPage - 1) * freeSlots.size();
+
+
+
+        int startIndex = (this.currentPage - 1) * freeSlots.size();
         int endIndex = Math.min(startIndex + freeSlots.size(), this.buttons.size());
 
+
+
         int slotIndex = 0;
+
         for (int i = startIndex; i < endIndex; ++i) {
             if (slotIndex < freeSlots.size()) {
                 InventoryButton button = this.getButtonsList().get(i);
 
                 for (Map.Entry<Integer, List<InventoryButton>> entrySet : this.integerListMap.entrySet()) {
                     if (entrySet.getValue().contains(button)) {
+
                         button.setItem(entrySet.getKey(), this.inventory);
                         getCurrentMappings().put(entrySet.getKey(), button);
                         continue;
@@ -184,19 +194,27 @@ public abstract class PaginationInstance extends GuiInstance implements Paginati
                 }
 
                 if (slotIndex < freeSlots.size()) {
+
                     button.setItem(freeSlots.get(slotIndex), this.inventory);
                     getCurrentMappings().put(freeSlots.get(slotIndex), button);
                     ++slotIndex;
                 }
             }
         }
+
         for (var entry : getCurrentMappings().entrySet()) {
+
             entry.getValue().setItem(entry.getKey(), inventory);
         }
 
-        navBar.decorate(inventory);
-        getBackGround().decorate(inventory);
-        return inventory;
+
+        getNavbar().decorate(this.inventory);
+
+
+        getBackGround().decorate(this.inventory);
+
+
+        return this.inventory;
     }
 
     /**
